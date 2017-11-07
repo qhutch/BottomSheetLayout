@@ -2,7 +2,6 @@ package com.qhutch.bottomsheetlayout
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,10 +11,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bottomSheetLayout.setOnClickListener { _ -> bottomSheetLayout.toggle() }
-        bottomSheetLayout.setOnProgressListener { progress -> logProgress(progress)}
+        bottomSheetLayout.setOnProgressListener { progress -> rotateArrow(progress)}
     }
 
-    private fun logProgress(progress: Float) {
-        Log.d("PROGRESS", "progress is $progress")
+    private fun rotateArrow(progress: Float) {
+        imageViewArrow.rotation = 180 * progress - 180
     }
 }
