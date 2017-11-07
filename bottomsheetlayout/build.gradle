@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
@@ -34,4 +35,14 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+
+publish {
+    groupId = 'com.github.qhutch'
+    artifactId = 'bottomsheetlayout'
+    publishVersion = '0.1'
+    desc = 'Custom draggable view that makes bottom sheet simple'
+    licences = ['Apache-2.0']
+    uploadName='BottomSheetLayout'
+    website = 'https://github.com/qhutch/BottomSheetLayout.git'
 }
