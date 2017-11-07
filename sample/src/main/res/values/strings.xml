@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BottomSheetLayout Sample</string>
+    <string name="bottom_sheet_title">My layout</string>
+</resources>
