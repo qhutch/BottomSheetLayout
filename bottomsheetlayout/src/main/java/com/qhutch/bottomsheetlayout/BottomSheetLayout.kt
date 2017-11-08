@@ -276,9 +276,6 @@ class BottomSheetLayout : FrameLayout {
     }
 
     interface OnProgressListener {
-        /**
-         * @param progress 1 is collapsed and 0 is expanded
-         */
         fun onProgress(progress: Float)
     }
 }

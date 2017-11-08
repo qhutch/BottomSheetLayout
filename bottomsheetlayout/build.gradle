@@ -1,6 +1,30 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'bottomsheetlayout'
+
+    publishedGroupId = 'com.qhutch.bottomsheetlayout'
+    libraryName = 'BottomSheetLayout'
+    artifact = 'bottomsheetlayout'
+
+    libraryDescription = 'A layout that can be scrolled like a bottom sheet'
+
+    siteUrl = 'https://github.com/qhutch/BottomSheetLayout'
+    gitUrl = 'https://github.com/qhutch/BottomSheetLayout.git'
+
+    libraryVersion = '0.1'
+
+    developerId = 'qhutch'
+    developerName = 'Quentin Menini'
+    developerEmail = 'quentin.menini@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 26
 
@@ -32,3 +56,6 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply from: '../installv1.gradle'
+apply from: '../bintrayv1.gradle'
