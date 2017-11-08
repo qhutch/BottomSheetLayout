@@ -1,3 +1,5 @@
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-BottomSheetLayout-green.svg?style=flat )]( https://android-arsenal.com/details/1/6425 )
+
 # BottomSheetLayout
 Simple bottom sheet view for Android
 
