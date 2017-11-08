@@ -182,17 +182,17 @@ class BottomSheetLayout : FrameLayout {
         return false
     }
 
-    private fun performChildClick(rawX: Float, rawY: Float): Boolean {
-        return performChildClick(rawX, rawY, this, 0)
+    private fun performChildClick(eventX: Float, eventY: Float): Boolean {
+        return performChildClick(eventX, eventY, this, 0)
     }
 
-    private fun performChildClick(rawX: Float, rawY: Float, viewGroup: ViewGroup, nest : Int): Boolean {
+    private fun performChildClick(eventX: Float, eventY: Float, viewGroup: ViewGroup, nest : Int): Boolean {
 
         for (i in (viewGroup.childCount - 1) downTo 0) {
             val view = viewGroup.getChildAt(i)
-            if (isViewAtLocation(rawX, rawY, view)) {
+            if (isViewAtLocation(eventX, eventY, view)) {
                 if (view is ViewGroup) {
-                    val performChildClick = performChildClick(rawX, rawY, view, nest + 1)
+                    val performChildClick = performChildClick(eventX - view.left, eventY - view.top, view, nest + 1)
                     if (performChildClick) {
                         return true
                     }
@@ -206,11 +206,8 @@ class BottomSheetLayout : FrameLayout {
     }
 
     private fun isViewAtLocation(rawX: Float, rawY: Float, view: View): Boolean {
-        val screenLocation = IntArray(2)
-        view.getLocationOnScreen(screenLocation)
-
-        if (screenLocation[0] <= rawX && screenLocation[0] + view.width >= rawX) {
-            if (screenLocation[1] <= rawY && screenLocation[1] + view.height >= rawY) {
+        if (view.left <= rawX && view.right >= rawX) {
+            if (view.top <= rawY && view.bottom >= rawY) {
                 return true
             }
         }
@@ -251,7 +248,7 @@ class BottomSheetLayout : FrameLayout {
                     val endX = ev.rawX
                     val endY = ev.rawY
                     if (isAClick(startX, endX, startY, endY, System.currentTimeMillis())) {
-                        if (performChildClick(endX, endY)) {
+                        if (performChildClick(ev.x, ev.y)) {
                             return true
                         }
                         if (touchToDrag && clickListener != null) {
