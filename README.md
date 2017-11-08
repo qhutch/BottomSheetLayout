@@ -37,7 +37,8 @@ And this in your layout xml :
 </com.qhutch.bottomsheetlayout.BottomSheetLayout>
 ```
 And use as any Frame Layout
-collapsedHeight is the height of the layout when collapsed (default is 0)
+
+*collapsedHeight* is the height of the layout when collapsed (default is 0)
 
 
 ### Java/(Kotlin)
