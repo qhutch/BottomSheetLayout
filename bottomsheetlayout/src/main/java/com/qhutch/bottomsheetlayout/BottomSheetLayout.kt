@@ -3,10 +3,10 @@ package com.qhutch.bottomsheetlayout
 import android.animation.ValueAnimator
 import android.content.Context
 import android.support.annotation.AttrRes
-import android.support.v4.view.MotionEventCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 
 /**
@@ -33,6 +33,8 @@ class BottomSheetLayout : FrameLayout {
     fun setOnProgressListener(l: OnProgressListener?) {
         progressListener = l
     }
+
+    private val touchToDragListener = TouchToDragListener(true)
 
     fun setOnProgressListener(l: (progress: Float) -> Unit) {
         progressListener = object : OnProgressListener {
@@ -69,7 +71,7 @@ class BottomSheetLayout : FrameLayout {
 
         valueAnimator = ValueAnimator.ofFloat(0f, 1f)
 
-        setOnTouchListener(TouchToDragListener(true))
+        setOnTouchListener(touchToDragListener)
 
         if (height == 0) {
             addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
@@ -173,6 +175,48 @@ class BottomSheetLayout : FrameLayout {
         valueAnimator.start()
     }
 
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev != null) {
+            return touchToDragListener.onTouch(this, ev)
+        }
+        return false
+    }
+
+    private fun performChildClick(rawX: Float, rawY: Float): Boolean {
+        return performChildClick(rawX, rawY, this, 0)
+    }
+
+    private fun performChildClick(rawX: Float, rawY: Float, viewGroup: ViewGroup, nest : Int): Boolean {
+
+        for (i in (viewGroup.childCount - 1) downTo 0) {
+            val view = viewGroup.getChildAt(i)
+            if (isViewAtLocation(rawX, rawY, view)) {
+                if (view is ViewGroup) {
+                    val performChildClick = performChildClick(rawX, rawY, view, nest + 1)
+                    if (performChildClick) {
+                        return true
+                    }
+                }
+                if (view.performClick()) {
+                    return true
+                }
+            }
+        }
+        return performClick()
+    }
+
+    private fun isViewAtLocation(rawX: Float, rawY: Float, view: View): Boolean {
+        val screenLocation = IntArray(2)
+        view.getLocationOnScreen(screenLocation)
+
+        if (screenLocation[0] <= rawX && screenLocation[0] + view.width >= rawX) {
+            if (screenLocation[1] <= rawY && screenLocation[1] + view.height >= rawY) {
+                return true
+            }
+        }
+        return false
+    }
+
     private inner class TouchToDragListener(private val touchToDrag: Boolean) : View.OnTouchListener {
 
         private val CLICK_ACTION_THRESHOLD = 5
@@ -181,7 +225,8 @@ class BottomSheetLayout : FrameLayout {
         private var startTime: Double = 0.toDouble()
 
         override fun onTouch(v: View, ev: MotionEvent): Boolean {
-            val action = MotionEventCompat.getActionMasked(ev)
+            //val action = MotionEventCompat.getActionMasked(ev)
+            val action = ev.action
 
             when (action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -206,6 +251,9 @@ class BottomSheetLayout : FrameLayout {
                     val endX = ev.rawX
                     val endY = ev.rawY
                     if (isAClick(startX, endX, startY, endY, System.currentTimeMillis())) {
+                        if (performChildClick(endX, endY)) {
+                            return true
+                        }
                         if (touchToDrag && clickListener != null) {
                             onClick()// WE HAVE A CLICK!!
                             return true
@@ -230,7 +278,7 @@ class BottomSheetLayout : FrameLayout {
         clickListener?.onClick(this)
     }
 
-    interface OnProgressListener{
+    interface OnProgressListener {
         /**
          * @param progress 1 is collapsed and 0 is expanded
          */

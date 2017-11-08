@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottomSheetLayout.setOnClickListener { _ -> bottomSheetLayout.toggle() }
+        imageViewArrow.setOnClickListener { _ -> bottomSheetLayout.toggle() }
         bottomSheetLayout.setOnProgressListener { progress -> rotateArrow(progress)}
     }
 
