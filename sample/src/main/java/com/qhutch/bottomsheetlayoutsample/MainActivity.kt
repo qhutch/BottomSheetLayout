@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rotateArrow(progress: Float) {
-        imageViewArrow.rotation = 180 * progress - 180
+        imageViewArrow.rotation = -180 * progress
     }
 }

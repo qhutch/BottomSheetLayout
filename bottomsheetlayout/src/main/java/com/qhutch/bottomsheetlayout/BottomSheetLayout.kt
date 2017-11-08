@@ -45,7 +45,7 @@ class BottomSheetLayout : FrameLayout {
     }
 
     fun isExpended(): Boolean {
-        return progress == 0f
+        return progress == 1f
     }
 
     constructor(context: Context) : super(context) {
@@ -77,11 +77,11 @@ class BottomSheetLayout : FrameLayout {
             addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
                 override fun onLayoutChange(view: View, i: Int, i1: Int, i2: Int, i3: Int, i4: Int, i5: Int, i6: Int, i7: Int) {
                     removeOnLayoutChangeListener(this)
-                    animate(1f)
+                    animate(0f)
                 }
             })
         } else {
-            animate(1f)
+            animate(0f)
         }
     }
 
@@ -107,7 +107,7 @@ class BottomSheetLayout : FrameLayout {
         if (valueAnimator.isRunning) {
             valueAnimator.cancel()
         }
-        valueAnimator = ValueAnimator.ofFloat(progress, 1f)
+        valueAnimator = ValueAnimator.ofFloat(progress, 0f)
 
         valueAnimator.addUpdateListener { animation ->
             val progress = animation.animatedValue as Float
@@ -121,7 +121,7 @@ class BottomSheetLayout : FrameLayout {
         if (valueAnimator.isRunning) {
             valueAnimator.cancel()
         }
-        valueAnimator = ValueAnimator.ofFloat(progress, 0f)
+        valueAnimator = ValueAnimator.ofFloat(progress, 1f)
 
         valueAnimator.addUpdateListener { animation ->
             val progress = animation.animatedValue as Float
@@ -131,12 +131,12 @@ class BottomSheetLayout : FrameLayout {
         valueAnimator.start()
     }
 
-    //0 is expanded, 1 is collapsed
+    //1 is expanded, 0 is collapsed
     private fun animate(progress: Float) {
         this.progress = progress
         val height = height
         val distance = height - collapsedHeight
-        translationY = distance * progress
+        translationY = distance * (1 - progress)
         progressListener?.onProgress(progress)
     }
 
@@ -145,12 +145,12 @@ class BottomSheetLayout : FrameLayout {
         val height = height
         val totalDistance = height - collapsedHeight
         var progress = this.progress
-        if (firstPos < touchPos && progress < 1) {
+        if (firstPos < touchPos && progress > 0) {
             isScrollingUp = false
-            progress = distance / totalDistance
-        } else if (firstPos > touchPos && progress > 0) {
+            progress = 1 - distance / totalDistance
+        } else if (firstPos > touchPos && progress < 1) {
             isScrollingUp = true
-            progress = 1 + distance / totalDistance
+            progress = -distance / totalDistance
         }
         progress = Math.max(0f, Math.min(1f, progress))
         animate(progress)
@@ -160,7 +160,7 @@ class BottomSheetLayout : FrameLayout {
         if (valueAnimator.isRunning) {
             valueAnimator.cancel()
         }
-        val progressLimit = if (isScrollingUp) 0.8f else 0.2f
+        val progressLimit = if (isScrollingUp) 0.2f else 0.8f
         valueAnimator = if (progress > progressLimit) {
             ValueAnimator.ofFloat(progress, 1f)
         } else {
@@ -186,7 +186,7 @@ class BottomSheetLayout : FrameLayout {
         return performChildClick(eventX, eventY, this, 0)
     }
 
-    private fun performChildClick(eventX: Float, eventY: Float, viewGroup: ViewGroup, nest : Int): Boolean {
+    private fun performChildClick(eventX: Float, eventY: Float, viewGroup: ViewGroup, nest: Int): Boolean {
 
         for (i in (viewGroup.childCount - 1) downTo 0) {
             val view = viewGroup.getChildAt(i)
