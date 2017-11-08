@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qhutch.bottomsheetlayout.MainActivity">
+    tools:context=".MainActivity">
 
     <com.qhutch.bottomsheetlayout.BottomSheetLayout
         android:id="@+id/bottomSheetLayout"
