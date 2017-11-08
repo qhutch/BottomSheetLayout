@@ -1,6 +1,9 @@
 # BottomSheetLayout
 Simple bottom sheet view for Android
 
+![alt text](https://raw.githubusercontent.com/qhutch/BottomSheetLayout/master/sample_gif.gif)
+
+
 ## How to use ?
 
 
