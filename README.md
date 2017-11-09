@@ -17,13 +17,6 @@ dependencies {
     implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.1'
 }
 ```
-or
-```
-dependencies {
-    ...
-    compile 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.1'
-}
-```
 
 
 
