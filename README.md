@@ -1,4 +1,5 @@
 [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-BottomSheetLayout-green.svg?style=flat )]( https://android-arsenal.com/details/1/6425 )
+[![Android Weekly]( https://img.shields.io/badge/Android%20Weekly-%23283-blue.svg?style=flat )]( http://androidweekly.net/issues/issue-283 )
 
 # BottomSheetLayout
 Simple bottom sheet view for Android
@@ -71,6 +72,18 @@ layout.setOnProgressListener { progress -> doSomethingWithTheProgress(progress) 
 ```
 progress is 0 when collapsed and 1 when expanded
 
+## TODO list:
+:white_large_square: Add possibility to change animation time <br/>
+:white_large_square: Compute time of end animation based on progress <br/>
+:white_large_square: Option to disable touch to drag <br/>
+
+
+## Contact
+
+Pull requests are more than welcome.
+
+- **Email**: quentin.menini.us@gmail.com
+- **Medium**: https://medium.com/@qhutch
 
 
 # License
