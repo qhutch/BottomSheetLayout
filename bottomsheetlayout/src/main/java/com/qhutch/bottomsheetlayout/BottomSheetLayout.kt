@@ -24,6 +24,8 @@ class BottomSheetLayout : FrameLayout {
 
     private var clickListener: OnClickListener? = null
 
+    var animationDuration: Long = 300
+
     override fun setOnClickListener(l: OnClickListener?) {
         clickListener = l
     }
@@ -89,16 +91,21 @@ class BottomSheetLayout : FrameLayout {
         if (valueAnimator.isRunning) {
             valueAnimator.cancel()
         }
+        val duration: Long
         valueAnimator = if (progress > 0.5f) {
-            ValueAnimator.ofFloat(1f, 0f)
+            duration = (animationDuration * progress).toLong()
+            ValueAnimator.ofFloat(progress, 0f)
         } else {
-            ValueAnimator.ofFloat(0f, 1f)
+            duration = (animationDuration * (1 - progress)).toLong()
+            ValueAnimator.ofFloat(progress, 1f)
         }
 
         valueAnimator.addUpdateListener { animation ->
             val progress = animation.animatedValue as Float
             animate(progress)
         }
+
+        valueAnimator.duration = duration
 
         valueAnimator.start()
     }
@@ -114,6 +121,8 @@ class BottomSheetLayout : FrameLayout {
             animate(progress)
         }
 
+        valueAnimator.duration = (animationDuration * progress).toLong()
+
         valueAnimator.start()
     }
 
@@ -127,6 +136,8 @@ class BottomSheetLayout : FrameLayout {
             val progress = animation.animatedValue as Float
             animate(progress)
         }
+
+        valueAnimator.duration = (animationDuration * (1 - progress)).toLong()
 
         valueAnimator.start()
     }
@@ -160,10 +171,13 @@ class BottomSheetLayout : FrameLayout {
         if (valueAnimator.isRunning) {
             valueAnimator.cancel()
         }
+        val duration: Long
         val progressLimit = if (isScrollingUp) 0.2f else 0.8f
         valueAnimator = if (progress > progressLimit) {
+            duration = (animationDuration * (1 - progress)).toLong()
             ValueAnimator.ofFloat(progress, 1f)
         } else {
+            duration = (animationDuration * progress).toLong()
             ValueAnimator.ofFloat(progress, 0f)
         }
 
@@ -171,6 +185,8 @@ class BottomSheetLayout : FrameLayout {
             val progress = animation.animatedValue as Float
             animate(progress)
         }
+
+        valueAnimator.duration = duration
 
         valueAnimator.start()
     }
