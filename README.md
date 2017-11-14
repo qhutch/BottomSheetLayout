@@ -74,7 +74,7 @@ progress is 0 when collapsed and 1 when expanded
 
 ## Changelog
 
-# 0.1.2
+##### 0.1.2
 - Added possibility to change animation time <br/>
 - Compute time of animation based on progress <br/>
 - Fixed click detection <br/>
