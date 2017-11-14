@@ -15,7 +15,7 @@ Add this to your app build.gradle
 ```
 dependencies {
     ...
-    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.1'
+    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.2'
 }
 ```
 
@@ -72,9 +72,14 @@ layout.setOnProgressListener { progress -> doSomethingWithTheProgress(progress) 
 ```
 progress is 0 when collapsed and 1 when expanded
 
+## Changelog
+
+# 0.1.2
+- Added possibility to change animation time <br/>
+- Compute time of animation based on progress <br/>
+- Fixed click detection <br/>
+
 ## TODO list:
-:white_large_square: Add possibility to change animation time <br/>
-:white_large_square: Compute time of end animation based on progress <br/>
 :white_large_square: Option to disable touch to drag <br/>
 
 
