@@ -216,7 +216,7 @@ class BottomSheetLayout : FrameLayout {
 
     private inner class TouchToDragListener(private val touchToDrag: Boolean) : View.OnTouchListener {
 
-        private val CLICK_ACTION_THRESHOLD = 5
+        private val CLICK_ACTION_THRESHOLD = 100
         private var startX: Float = 0.toFloat()
         private var startY: Float = 0.toFloat()
         private var startTime: Double = 0.toDouble()
