@@ -19,6 +19,7 @@ class BottomSheetLayout : FrameLayout {
     private var collapsedHeight: Int = 0
 
     private var progress = 0f
+    private var startsCollapsed = true
 
     private var isScrollingUp: Boolean = false
 
@@ -156,10 +157,10 @@ class BottomSheetLayout : FrameLayout {
         val height = height
         val totalDistance = height - collapsedHeight
         var progress = this.progress
-        if (firstPos < touchPos && progress > 0) {
+        if (!startsCollapsed && progress > 0) {
             isScrollingUp = false
             progress = 1 - distance / totalDistance
-        } else if (firstPos > touchPos && progress < 1) {
+        } else if (startsCollapsed && progress < 1) {
             isScrollingUp = true
             progress = -distance / totalDistance
         }
@@ -247,6 +248,7 @@ class BottomSheetLayout : FrameLayout {
                         startX = ev.rawX
                         startY = ev.rawY
                         startTime = System.currentTimeMillis().toDouble()
+                        startsCollapsed = progress < 0.5
                     }
                 }
 
