@@ -15,7 +15,7 @@ Add this to your app build.gradle
 ```
 dependencies {
     ...
-    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.3'
+    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.4'
 }
 ```
 
@@ -81,6 +81,9 @@ progress is 0 when collapsed and 1 when expanded
 
 ##### 0.1.3
 - Reduced minSdk to 14 <br/>
+
+##### 0.1.4
+- Fixed scroll bug <br/>
 
 ## TODO list:
 :white_large_square: Option to disable touch to drag <br/>
