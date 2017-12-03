@@ -15,7 +15,7 @@ Add this to your app build.gradle
 ```
 dependencies {
     ...
-    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.5'
+    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.6'
 }
 ```
 
@@ -87,6 +87,9 @@ progress is 0 when collapsed and 1 when expanded
 
 ##### 0.1.5
 - Override setTranslationY to separate translation from scroll and translation set by user <br/>
+
+##### 0.1.6
+- Fixed bug that prevented from scrolling back when end was reached <br/>
 
 ## TODO list:
 :white_large_square: Option to disable touch to drag <br/>

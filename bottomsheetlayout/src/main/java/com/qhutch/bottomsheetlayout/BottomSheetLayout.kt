@@ -169,12 +169,12 @@ class BottomSheetLayout : FrameLayout {
         val height = height
         val totalDistance = height - collapsedHeight
         var progress = this.progress
-        if (!startsCollapsed && progress > 0) {
+        if (!startsCollapsed) {
             isScrollingUp = false
-            progress = 1 - distance / totalDistance
-        } else if (startsCollapsed && progress < 1) {
+            progress = Math.max(0f, 1 - distance / totalDistance)
+        } else if (startsCollapsed) {
             isScrollingUp = true
-            progress = -distance / totalDistance
+            progress = Math.min(1f, -distance / totalDistance)
         }
         progress = Math.max(0f, Math.min(1f, progress))
         animate(progress)

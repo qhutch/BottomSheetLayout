@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/qhutch/BottomSheetLayout'
     gitUrl = 'https://github.com/qhutch/BottomSheetLayout.git'
 
-    libraryVersion = '0.1.5'
+    libraryVersion = '0.1.6'
 
     developerId = 'qhutch'
     developerName = 'Quentin Menini'
