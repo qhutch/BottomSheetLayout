@@ -2,6 +2,7 @@ package com.qhutch.bottomsheetlayout
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.os.Build
 import android.support.annotation.AttrRes
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -20,6 +21,9 @@ class BottomSheetLayout : FrameLayout {
 
     private var progress = 0f
     private var startsCollapsed = true
+
+    private var scrollTranslationY = 0f
+    private var userTranslationY = 0f
 
     private var isScrollingUp: Boolean = false
 
@@ -63,12 +67,19 @@ class BottomSheetLayout : FrameLayout {
         initView(attrs)
     }
 
+    override fun setTranslationY(translationY: Float) {
+        userTranslationY = translationY
+        super.setTranslationY(scrollTranslationY + userTranslationY)
+    }
+
     private fun initView(attrs: AttributeSet?) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.BottomSheetLayout)
 
         collapsedHeight = a.getDimensionPixelSize(R.styleable.BottomSheetLayout_collapsedHeight, 0)
 
-        minimumHeight = Math.max(minimumHeight, collapsedHeight)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            minimumHeight = Math.max(minimumHeight, collapsedHeight)
+        }
 
         a.recycle()
 
@@ -148,7 +159,8 @@ class BottomSheetLayout : FrameLayout {
         this.progress = progress
         val height = height
         val distance = height - collapsedHeight
-        translationY = distance * (1 - progress)
+        scrollTranslationY = distance * (1 - progress)
+        super.setTranslationY(scrollTranslationY + userTranslationY)
         progressListener?.onProgress(progress)
     }
 
