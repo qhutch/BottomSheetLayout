@@ -74,8 +74,9 @@ class BottomSheetLayout : FrameLayout {
 
     private fun initView(attrs: AttributeSet?) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.BottomSheetLayout)
+        val collapsedHeight = a.getDimensionPixelSize(R.styleable.BottomSheetLayout_collapsedHeight, 0)
 
-        collapsedHeight = a.getDimensionPixelSize(R.styleable.BottomSheetLayout_collapsedHeight, 0)
+        setCollapsedHeight(collapsedHeight)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             minimumHeight = Math.max(minimumHeight, collapsedHeight)
@@ -96,6 +97,13 @@ class BottomSheetLayout : FrameLayout {
             })
         } else {
             animate(0f)
+        }
+    }
+
+    fun setCollapsedHeight(height: Int) {
+        collapsedHeight = height
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            minimumHeight = Math.max(minimumHeight, collapsedHeight)
         }
     }
 
