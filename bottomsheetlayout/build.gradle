@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/qhutch/BottomSheetLayout'
     gitUrl = 'https://github.com/qhutch/BottomSheetLayout.git'
 
-    libraryVersion = '0.1.7'
+    libraryVersion = '0.1.9'
 
     developerId = 'qhutch'
     developerName = 'Quentin Menini'
@@ -50,7 +50,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

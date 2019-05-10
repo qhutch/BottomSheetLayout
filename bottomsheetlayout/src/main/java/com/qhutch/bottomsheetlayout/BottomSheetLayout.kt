@@ -3,7 +3,7 @@ package com.qhutch.bottomsheetlayout
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Build
-import android.support.annotation.AttrRes
+import androidx.annotation.AttrRes
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
