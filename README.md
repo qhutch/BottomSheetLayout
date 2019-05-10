@@ -15,7 +15,7 @@ Add this to your app build.gradle
 ```
 dependencies {
     ...
-    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.6'
+    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.7'
 }
 ```
 
@@ -90,6 +90,10 @@ progress is 0 when collapsed and 1 when expanded
 
 ##### 0.1.6
 - Fixed bug that prevented from scrolling back when end was reached <br/>
+
+##### 0.1.7
+- Added set collapsedHeight method
+- Updated gradle, kotlin and build sdk
 
 ## TODO list:
 :white_large_square: Option to disable touch to drag <br/>
